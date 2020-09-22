@@ -16,18 +16,18 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">{{item.title}}</h1>
-            <p class="lead">{{item.desc}}</p>
-            <p class="lead">${{item.price}}</p>
-            <p class="lead">{{item.location}}</p>
-            <p class="lead"><a href="">{{item.posted_by.first}}</a></p>
-            <p class="lead">{{item.created_at}}</p>
+        <a href="/dashboard" class="btn btn-primary btn-sm">Home</a>
+        <br>
+            <h1 class="display-4">Title: {{item.title}}</h1>
+            <p class="lead">Description: {{item.desc}}</p>
+            <p class="lead">Price: ${{item.price}}</p>
+            <p class="lead">Location: {{item.location}}</p>
+            <p class="lead">Posted by: <a href="">{{item.posted_by.first}}</a></p>
+            <p class="lead">Posted on: {{item.created_at}}</p>
         </div>
     </div>
     <div class="container">
-        <p></p>
-        <p></p>
-    
+    <img src="{{item.img}}" alt="">
     </div>
 
     <!-- Optional JavaScript -->

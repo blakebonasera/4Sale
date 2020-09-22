@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <div class="jumbotron">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
         <h1 class="display-4">
             Welcome, {{logged_in_user.first}}!
         </h1>
@@ -24,6 +25,7 @@
         <p class="lead">
             <a class="btn btn-primary btn-lg" href="/newlisting" role="button">New Listing</a>
         </p>
+    </div>
     </div>
     <div class="container">
         <h2>New Listings</h2>
