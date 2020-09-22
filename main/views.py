@@ -1,7 +1,8 @@
 from django.shortcuts import render , HttpResponse, redirect
 from django.contrib import messages
-from .models import User
+from .models import User, Listing
 import bcrypt
+from PIL import Image
 
 # Create your views here.
 def index(request):
@@ -46,9 +47,32 @@ def success(request):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     context = {
         'logged_in_user': logged_in_user,
+        'all_listings': Listing.objects.all()
     }
     return render(request, 'dashboard.html', context)
 
 def logout(request):
     request.session.clear()
     return redirect('/')
+
+def listing(request):
+    logged_in_user = User.objects.get(id=request.session['user_id'])
+    return render(request, 'newlisting.html')
+
+def addListing(request):
+    logged_in_user = User.objects.get(id=request.session['user_id'])
+    Listing.objects.create(
+        title= request.POST['title'],
+        desc=request.POST['desc'],
+        posted_by= logged_in_user,
+        price=request.POST['price'],
+        location=request.POST['location']
+    )
+    return redirect('/dashboard')
+
+def viewListing(request, num):
+    item = Listing.objects.get(id=num)
+    context ={
+        'item': item
+    }
+    return render(request, 'viewlisting.html', context)
