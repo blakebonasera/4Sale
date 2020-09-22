@@ -9,9 +9,9 @@ class UserManager(models.Manager):
         errors = {}
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(postData['first']) < 2:
-            errors['first'] = 'You need more than 2 letters in your name'
+            errors['first'] = 'You need at least 2 letters in your name'
         if len(postData['last']) < 2:
-            errors['last'] = 'You need more than 2 letters in your name'
+            errors['last'] = 'You need at least 2 letters in your name'
         if len(postData['pw']) < 8:
             errors['pw_length'] = "Password must be at least 8 characters"
         if postData['pw'] != postData['cPw']:
