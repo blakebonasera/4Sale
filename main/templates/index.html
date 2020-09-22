@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-    <title>Hello, world!</title>
+    <title>4Sale</title>
 </head>
 
 <body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">4Sale</h1>
+            <p class="lead">We take pride in being a market place for all of your hype neccesaties!</p>
+        </div>
+    </div>
     <div class="container">
         <div id="registration">
             <h2>Registration</h2>
@@ -42,14 +48,14 @@
                 <input type="submit" value="Register">
             </form>
             {% if messages %}
-        <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}
-        </li>
-        {% endfor %}
-        </ul>
-        {% endif %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
         <div id="login">
             <h2>Login</h2>
