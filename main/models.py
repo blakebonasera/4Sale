@@ -45,3 +45,18 @@ class User(models.Model):
     objects = UserManager()
     def __repr__(self):
         return f'{self.first} {self.last}'
+
+
+
+class Listing(models.Model):
+    title = models.CharField(max_length=100)
+    desc = models.TextField()
+    img = models.ImageField(upload_to='static/img', height_field=None, width_field=None, max_length=100)
+    posted_by = models.ForeignKey(User, related_name='posted', on_delete=models.CASCADE)
+    price = models.IntegerField()
+    condition = models.CharField(max_length=10)
+    location = models.CharField(max_length=15)
+    watching = models.ManyToManyField(User, related_name='watching')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
