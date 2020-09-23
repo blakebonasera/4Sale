@@ -16,6 +16,7 @@
             height: 400px;
             width: 40%;
         }
+
         img {
             height: 300px;
             width: auto;
@@ -42,6 +43,17 @@
         <p class="lead">Posted on: {{item.created_at}}</p>
         <p class="lead">Location: {{item.location}}</p>
         <div id="map"></div>
+        {% for comment in item.comments.all %}
+        {{comment.user.first}} {{comment.user.id}} 
+        {{comment.comment}} {{comment.created_at}}</br>
+        {% endfor %}
+        <form action="/comment/{{item.id}}" method="POST">
+            {% csrf_token %}
+            <label for="comment">Leave a comment</label>
+            <input type="hidden" name="comment_id" value={{item.id}}>
+            <input type="text" name="comment" id="num">
+            <input type="submit" value="Post">
+        </form>
         <div class="container">
             {% if logged_in_user.id == item.posted_by.id %}
             <h2>Update Listing</h2>
@@ -54,30 +66,13 @@
             {% endif %}
         </div>
     </div>
-    {% for comment in all_comment %}
-    {{comment.user.first}} {{comment.user.last}} |
-    
-    
-    {% for comment in item.comments.all %}
-    {% endfor %}
-    {{comment.comment}} {{comment.created_at}}</br>
-    
-    {% endfor %}
-    
-    <form action="/comment/{{item.id}}" method="POST">
-        {% csrf_token %}
-        <label for="comment">Leave a comment</label>
-        <input type="text" name="comment" id="num">
-        <input type="submit" value="Post">
-        </form>   
-        
 
 
     <!-- Optional JavaScript -->
     <script>
 
         function initMap() {
-            
+
             var seattle = { lat: 47.6205, lng: -122.3493 };
 
             var map = new google.maps.Map(

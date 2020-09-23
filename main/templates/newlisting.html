@@ -14,14 +14,20 @@
 </head>
 
 <body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Make a New Listing</h1>
+            <p class="lead">Use the form below to make a listing to trade or sell on 4Sale.</p>
+        </div>
+    </div>
     <div class="container">
         <h2>New Listing</h2>
         <form enctype="multipart/form-data" method="POST" action="/addlisting">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Upload"/>
-            </form>
-            
+            <input class='btn btn-success'type="submit" value="Upload" />
+        </form>
+
 
     </div>
 
@@ -36,7 +42,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        
+
 </body>
 
 </html>

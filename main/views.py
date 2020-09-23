@@ -87,15 +87,13 @@ def addListing(request):
 def viewListing(request, num):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
-    all_comment = Comment.objects.all()
-    
     form= ImageForm(request.POST or None, request.FILES or None)
     context ={
         'form': form,
         'logged_in_user': logged_in_user,
         'item': item,
-        'all_comment': all_comment
     }
+    print(item.comments.all())
     return render(request, 'viewlisting.html', context)
 
 def updateListing(request, num):
@@ -136,6 +134,10 @@ def comment(request, num):
     comment = request.POST['comment']
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
-    new_comment = Comment.objects.create(comment=comment, user=logged_in_user, listing=item)
+    new_comment = Comment.objects.create(
+        comment=comment, 
+        user=logged_in_user, 
+        listing=item
+        )
     
     return redirect(f'/view/{item.id}')
