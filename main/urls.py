@@ -13,5 +13,6 @@ urlpatterns = [
     path('view/<int:num>/update', views.updateListing),
     path('view/<int:num>/delete', views.deleteListing),
     path('view/<int:num>/watch', views.watch),
-    path('user/<int:num>', views.user)
-]
+    path('user/<int:num>', views.user),
+    path('comment/<int:num>', views.comment),
+]  

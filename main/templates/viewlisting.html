@@ -54,7 +54,23 @@
             {% endif %}
         </div>
     </div>
-
+    {% for comment in all_comment %}
+    {{comment.user.first}} {{comment.user.last}} |
+    
+    
+    {% for comment in item.comments.all %}
+    {% endfor %}
+    {{comment.comment}} {{comment.created_at}}</br>
+    
+    {% endfor %}
+    
+    <form action="/comment/{{item.id}}" method="POST">
+        {% csrf_token %}
+        <label for="comment">Leave a comment</label>
+        <input type="text" name="comment" id="num">
+        <input type="submit" value="Post">
+        </form>   
+        
 
 
     <!-- Optional JavaScript -->

@@ -62,3 +62,10 @@ class Listing(models.Model):
     def __str__(self):
         return self.name + ": " + str(self.imagefile)
 
+class Comment(models.Model):
+    comment = models.TextField(max_length=200)
+    user = models.ForeignKey(User, related_name="users", on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, related_name="comments", on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+

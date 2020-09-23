@@ -1,6 +1,6 @@
 from django.shortcuts import render , HttpResponse, redirect
 from django.contrib import messages
-from .models import User, Listing
+from .models import User, Listing, Comment
 import bcrypt
 from PIL import Image
 from .forms import ImageForm
@@ -87,12 +87,14 @@ def addListing(request):
 def viewListing(request, num):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
+    all_comment = Comment.objects.all()
     
     form= ImageForm(request.POST or None, request.FILES or None)
     context ={
         'form': form,
         'logged_in_user': logged_in_user,
-        'item': item
+        'item': item,
+        'all_comment': all_comment
     }
     return render(request, 'viewlisting.html', context)
 
@@ -127,3 +129,13 @@ def user(request, num):
         'all_listings': Listing.objects.all()
     }
     return render(request, 'user.html', context)
+
+def comment(request, num):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    comment = request.POST['comment']
+    logged_in_user = User.objects.get(id=request.session['user_id'])
+    item = Listing.objects.get(id=num)
+    new_comment = Comment.objects.create(comment=comment, user=logged_in_user, listing=item)
+    
+    return redirect(f'/view/{item.id}')
