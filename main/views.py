@@ -131,8 +131,8 @@ def user(request, num):
     return render(request, 'user.html', context)
 
 def comment(request, num):
-    if 'user_id' not in request.session:
-        return redirect('/')
+    # if 'user_id' not in request.session:
+    #     return redirect('/')
     comment = request.POST['comment']
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
