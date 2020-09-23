@@ -118,5 +118,12 @@ def watch(request, num):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
     logged_in_user.watching.add(item)
-    print(item.__dict__)
     return redirect(f'/view/{item.id}')
+
+def user(request, num):
+    view_user = User.objects.get(id=num)
+    context ={
+        'view_user': view_user,
+        'all_listings': Listing.objects.all()
+    }
+    return render(request, 'user.html', context)

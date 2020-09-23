@@ -16,6 +16,10 @@
             height: 400px;
             width: 40%;
         }
+        img {
+            height: 300px;
+            width: auto;
+        }
     </style>
 </head>
 
@@ -34,7 +38,7 @@
         <p class="lead">Description: {{item.desc}}</p>
         <p class="lead">Condition: {{item.condition}}</p>
         <p class="lead">Price: ${{item.price}}</p>
-        <p class="lead">Posted by: <a href="">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
+        <p class="lead">Posted by: <a href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
         <p class="lead">Posted on: {{item.created_at}}</p>
         <p class="lead">Location: {{item.location}}</p>
         <div id="map"></div>
