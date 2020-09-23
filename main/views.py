@@ -60,7 +60,7 @@ def listing(request):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     form= ImageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
-        newform = Listing(docfile = request.FILES['docfile'])
+        newform = Listing(img = request.FILES['img'])
         newform.save()
     context= {
         'form': form
@@ -70,14 +70,16 @@ def listing(request):
 
 def addListing(request):
     logged_in_user = User.objects.get(id=request.session['user_id'])
-    Listing.objects.create(
-        title= request.POST['title'],
-        desc=request.POST['desc'],
-        posted_by= logged_in_user,
-        price=request.POST['price'],
-        location=request.POST['location'],
-        img=request.POST['img']
-    )
+    form= ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        Listing.objects.create(
+            title= request.POST['title'],
+            desc=request.POST['desc'],
+            posted_by= logged_in_user,
+            price=request.POST['price'],
+            location=request.POST['location'],
+            img=request.FILES['img']
+        )
     return redirect('/dashboard')
 
 def viewListing(request, num):
