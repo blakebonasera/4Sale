@@ -77,6 +77,7 @@ def addListing(request):
             desc=request.POST['desc'],
             posted_by= logged_in_user,
             price=request.POST['price'],
+            condition=request.POST['condition'],
             location=request.POST['location'],
             img=request.FILES['img']
         )

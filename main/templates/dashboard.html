@@ -28,27 +28,6 @@
     </div>
     </div>
     <div class="container">
-        <h2>New Listings</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Posted By</th>
-                    <th scope="col">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for Listing in all_listings %}
-                <tr>
-                    <th scope="row">{{Listing.id}}</th>
-                    <td>{{Listing.title}}</td>
-                    <td>{{Listing.posted_by.first}}</td>
-                    <td>{{Listing.price}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
         <h2>All Listings</h2>
         <table class="table">
             <thead>
