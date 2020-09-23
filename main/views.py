@@ -85,6 +85,7 @@ def addListing(request):
 def viewListing(request, num):
     logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
+    
     form= ImageForm(request.POST or None, request.FILES or None)
     context ={
         'form': form,
