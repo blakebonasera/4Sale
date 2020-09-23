@@ -9,5 +9,7 @@ urlpatterns = [
     path('login', views.login),
     path('addlisting', views.addListing),
     path('newlisting', views.listing),
-    path('view/<int:num>', views.viewListing)
+    path('view/<int:num>', views.viewListing),
+    path('view/<int:num>/update', views.updateListing),
+    path('view/<int:num>/delete', views.deleteListing),
 ]

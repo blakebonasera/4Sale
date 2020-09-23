@@ -24,11 +24,18 @@
             <p class="lead">Location: {{item.location}}</p>
             <p class="lead">Posted by: <a href="">{{item.posted_by.first}}</a></p>
             <p class="lead">Posted on: {{item.created_at}}</p>
-
         </div>
     </div>
     <div class="container">
-        <p>{{item.img}}</p>
+        {% if logged_in_user.id == item.posted_by.id %}
+        <h2>Update Listing</h2>
+        <form enctype="multipart/form-data" method="POST" action="/view/{{item.id}}/update">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update"/>
+            </form>
+            <a href="/view/{{item.id}}/delete" class="btn btn-danger">Delete</a>
+        {% endif %}
     </div>
 
     <!-- Optional JavaScript -->

@@ -75,13 +75,36 @@ def addListing(request):
         desc=request.POST['desc'],
         posted_by= logged_in_user,
         price=request.POST['price'],
-        location=request.POST['location']
+        location=request.POST['location'],
+        img=request.POST['img']
     )
     return redirect('/dashboard')
 
 def viewListing(request, num):
+    logged_in_user = User.objects.get(id=request.session['user_id'])
     item = Listing.objects.get(id=num)
+    form= ImageForm(request.POST or None, request.FILES or None)
     context ={
+        'form': form,
+        'logged_in_user': logged_in_user,
         'item': item
     }
     return render(request, 'viewlisting.html', context)
+
+def updateListing(request, num):
+    to_update = Listing.objects.get(id=num)
+    form= ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        to_update.title = request.POST['title']
+        to_update.desc = request.POST['desc']
+        to_update.img = request.FILES['img']
+        to_update.price = request.POST['price']
+        to_update.condition= request.POST['condition']
+        to_update.location = request.POST['location']
+        to_update.save()
+    return redirect('/dashboard')
+
+def deleteListing(request, num):
+    to_delete = Listing.objects.get(id=num)
+    to_delete.delete()
+    return redirect('/dashboard')
