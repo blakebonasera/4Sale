@@ -47,6 +47,7 @@ def success(request):
         return redirect('/')
     logged_in_user = User.objects.get(id=request.session['user_id'])
     context = {
+        'watching': logged_in_user.watching.all(),
         'logged_in_user': logged_in_user,
         'all_listings': Listing.objects.all()
     }
@@ -112,3 +113,10 @@ def deleteListing(request, num):
     to_delete = Listing.objects.get(id=num)
     to_delete.delete()
     return redirect('/dashboard')
+
+def watch(request, num):
+    logged_in_user = User.objects.get(id=request.session['user_id'])
+    item = Listing.objects.get(id=num)
+    logged_in_user.watching.add(item)
+    print(item.__dict__)
+    return redirect(f'/view/{item.id}')

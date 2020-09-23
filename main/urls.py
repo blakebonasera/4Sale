@@ -12,4 +12,5 @@ urlpatterns = [
     path('view/<int:num>', views.viewListing),
     path('view/<int:num>/update', views.updateListing),
     path('view/<int:num>/delete', views.deleteListing),
+    path('view/<int:num>/watch', views.watch)
 ]

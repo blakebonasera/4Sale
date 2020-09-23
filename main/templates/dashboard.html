@@ -16,6 +16,7 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
+        <a href="/logout" class="btn btn-primary btn-sm">logout</a>
         <h1 class="display-4">
             Welcome, {{logged_in_user.first}}!
         </h1>
@@ -45,10 +46,17 @@
                     <td><a href="/view/{{Listing.id}}">{{Listing.title}}</a></td>
                     <td>{{Listing.posted_by.first}}</td>
                     <td>{{Listing.price}}</td>
+                    {% endfor %}
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
+        
+        <h2>Items you are watching.</h2>
+        <ul>{% for watching in logged_in_user.watching.all %}
+            <li><a href="/view/{{watching.id}}">{{watching.title}}</a></li>
+        </ul>
+        {% endfor %}
+        
     </div>
 
     <!-- Optional JavaScript -->

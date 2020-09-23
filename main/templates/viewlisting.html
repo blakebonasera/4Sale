@@ -12,63 +12,63 @@
 
     <title>4Sale: View Listing</title>
     <style>
-        
         #map {
-          height: 400px;  
-          width: 40%;  
-         }
-      </style>
+            height: 400px;
+            width: 40%;
+        }
+    </style>
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-        <a href="/dashboard" class="btn btn-primary btn-sm">Home</a>
-        <br>
+            <a href="/dashboard" class="btn btn-primary btn-sm">Home</a>
+            <br>
             <h1 class="display-4">{{item.title}}</h1>
-            
+
         </div>
     </div>
     <div class="container container-fluid">
         <img src="{{MEDIA_URL}}{{item.img}}" alt="">
+        <p class="lead"><a href="/view/{{item.id}}/watch">Watch item</a></p>
         <p class="lead">Description: {{item.desc}}</p>
-            <p class="lead">Condition: {{item.condition}}</p>
-            <p class="lead">Price: ${{item.price}}</p>
-            <p class="lead">Posted by: <a href="">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
-            <p class="lead">Posted on: {{item.created_at}}</p>
-            <p class="lead">Location: {{item.location}}</p>
-            <div id="map"></div>
+        <p class="lead">Condition: {{item.condition}}</p>
+        <p class="lead">Price: ${{item.price}}</p>
+        <p class="lead">Posted by: <a href="">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
+        <p class="lead">Posted on: {{item.created_at}}</p>
+        <p class="lead">Location: {{item.location}}</p>
+        <div id="map"></div>
         <div class="container">
-        {% if logged_in_user.id == item.posted_by.id %}
-        <h2>Update Listing</h2>
-        <form enctype="multipart/form-data" method="POST" action="/view/{{item.id}}/update">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Update"/>
-            <a href="/view/{{item.id}}/delete" class="btn btn-sm btn-danger">Delete</a>
+            {% if logged_in_user.id == item.posted_by.id %}
+            <h2>Update Listing</h2>
+            <form enctype="multipart/form-data" method="POST" action="/view/{{item.id}}/update">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Update" />
+                <a href="/view/{{item.id}}/delete" class="btn btn-sm btn-danger">Delete</a>
             </form>
-        {% endif %}
+            {% endif %}
         </div>
     </div>
-        
-        
+
+
 
     <!-- Optional JavaScript -->
     <script>
-    
+
         function initMap() {
-          
-          var seattle = {lat: 47.60357, lng: -122.32945};
-         
-          var map = new google.maps.Map(
-              document.getElementById('map'), {zoom: 15, center: seattle});
-          
-          var marker = new google.maps.Marker({position: seattle, map: map});
+
+            var seattle = { lat: 47.60357, lng: -122.32945 };
+
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 15, center: seattle });
+
+            var marker = new google.maps.Marker({ position: seattle, map: map });
         }
-            </script>
-            <script defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3hTzNLbe80o_OoRtdj9omg9fS8Jgg6ck&callback=initMap">
-            </script>
+    </script>
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3hTzNLbe80o_OoRtdj9omg9fS8Jgg6ck&callback=initMap">
+        </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
