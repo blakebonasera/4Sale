@@ -19,15 +19,18 @@
         <a href="/dashboard" class="btn btn-primary btn-sm">Home</a>
         <br>
             <h1 class="display-4">Title: {{item.title}}</h1>
-            <p class="lead">Description: {{item.desc}}</p>
-            <p class="lead">Price: ${{item.price}}</p>
-            <p class="lead">Location: {{item.location}}</p>
-            <p class="lead">Posted by: <a href="">{{item.posted_by.first}}</a></p>
-            <p class="lead">Posted on: {{item.created_at}}</p>
-            <img src="{{MEDIA_URL}}{{item.img}}" alt="">
+            
         </div>
     </div>
-    <div class="container">
+    <div class="container container-fluid">
+        <img src="{{MEDIA_URL}}{{item.img}}" alt="">
+        <p class="lead">Description: {{item.desc}}</p>
+            <p class="lead">Condition: {{item.condition}}</p>
+            <p class="lead">Price: ${{item.price}}</p>
+            <p class="lead">Location: {{item.location}}</p>
+            <p class="lead">Posted by: <a href="">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
+            <p class="lead">Posted on: {{item.created_at}}</p>
+        <div class="container">
         {% if logged_in_user.id == item.posted_by.id %}
         <h2>Update Listing</h2>
         <form enctype="multipart/form-data" method="POST" action="/view/{{item.id}}/update">
@@ -37,6 +40,7 @@
             <a href="/view/{{item.id}}/delete" class="btn btn-sm btn-danger">Delete</a>
             </form>
         {% endif %}
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
