@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import User, Listing
 import bcrypt
 from PIL import Image
+from .forms import ImageForm
 
 # Create your views here.
 def index(request):
@@ -57,7 +58,15 @@ def logout(request):
 
 def listing(request):
     logged_in_user = User.objects.get(id=request.session['user_id'])
-    return render(request, 'newlisting.html')
+    form= ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        newform = Listing(docfile = request.FILES['docfile'])
+        newform.save()
+    context= {
+        'form': form
+            }
+
+    return render(request, 'newlisting.html', context)
 
 def addListing(request):
     logged_in_user = User.objects.get(id=request.session['user_id'])

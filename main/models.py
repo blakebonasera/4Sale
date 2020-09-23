@@ -51,7 +51,7 @@ class User(models.Model):
 class Listing(models.Model):
     title = models.CharField(max_length=100)
     desc = models.TextField()
-    img = models.ImageField(upload_to='static/img', height_field=None, width_field=None, max_length=100)
+    img = models.FileField()
     posted_by = models.ForeignKey(User, related_name='posted', on_delete=models.CASCADE)
     price = models.IntegerField()
     condition = models.CharField(max_length=10)
@@ -59,4 +59,6 @@ class Listing(models.Model):
     watching = models.ManyToManyField(User, related_name='watching')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    def __str__(self):
+        return self.name + ": " + str(self.imagefile)
+
