@@ -21,18 +21,13 @@ class UserManager(models.Manager):
         if not EMAIL_REGEX.match(postData['email']):                
             errors['email'] = "Invalid email address!"
         return errors
-    def login_validator(self, postData):
+    def login_validator(self, post_data):
         errors = {}
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['email']) < 8:
-            errors['email_length'] = 'Email is not long enough'
-        user = User.objects.get(email=postData['email'])  
-        if bcrypt.checkpw(postData['pw'].encode(), user.password.encode()):
-            print("password match")
-        else:
-            errors['incorrect'] = "Email or Password is incorect"
-        if not EMAIL_REGEX.match(postData['email']):                
-            errors['email'] = "Invalid email address!"
+        if len(post_data['email']) < 8:
+            errors['email_length'] = "Email must be at least 8 characters long"
+        if not EMAIL_REGEX.match(post_data['email']):
+            errors['invalid_email'] = "Invalid email. Please try again"
         return errors
 
 class User(models.Model):

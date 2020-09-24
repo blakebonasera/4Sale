@@ -36,12 +36,10 @@ def login(request):
     if len(list_of_users) > 0:
         user = list_of_users[0]
         print(user)
-        if bcrypt.checkpw(request.POST['pw'].encode(), user.password.encode()):
+        if bcrypt.checkpw(request.POST['pw'].encode("utf-8"), user.password.encode("utf-8")):
             request.session['user_id'] = user.id
             return redirect('/dashboard')
-        else:
-            errors['incorrect'] = 'Your email or password is incorrect'
-
+    return redirect('/')
 def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
