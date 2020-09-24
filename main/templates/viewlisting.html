@@ -20,8 +20,9 @@
         }
 
         img {
-            height: 300px;
+            height: 400px;
             width: auto;
+            margin: 10px;
         }
     </style>
 </head>
@@ -36,8 +37,8 @@
         </div>
     </div>
     <div class="container container-fluid">
+        <img  src="{{MEDIA_URL}}{{item.img}}" alt="">
         <div class="card border-success" style="width: 30rem;">
-            <img class="card-img-top" src="{{MEDIA_URL}}{{item.img}}" alt="Card image cap">
             <div class="card-body">
                 <ul class="list-group">
                     <li class="list-group-item">Description: {{item.desc}}</li>

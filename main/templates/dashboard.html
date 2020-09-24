@@ -54,10 +54,11 @@
         
         <h2>Items you are watching.</h2>
         {% for watching in logged_in_user.watching.all %}
+            <div class="container">
             <ul class="list-group">
                 <li class="list-group-item"><a href="/view/{{watching.id}}">{{watching.title}}</a></li>
                 </ul>
-            
+            </div>
         {% endfor %}
         
     </div>
