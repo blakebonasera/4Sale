@@ -43,6 +43,7 @@
         <p class="lead">Posted on: {{item.created_at}}</p>
         <p class="lead">Location: {{item.location}}</p>
         <div id="map"></div>
+        <h3>Comments:</h3>
         {% for comment in item.comments.all %}
         {{comment.user.first}} {{comment.user.id}} 
         {{comment.comment}} {{comment.created_at}}</br>
