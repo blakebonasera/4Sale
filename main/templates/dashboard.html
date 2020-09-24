@@ -56,7 +56,11 @@
                 {% for Listing in all_listings reversed %}
                 <tr>
                     <th scope="row">{{Listing.id}}</th>
-                    <td> <img  src="{{MEDIA_URL}}{{Listing.img}}" alt=""></td>
+                    <td> 
+                        <a href="/view/{{Listing.id}}">
+                            <img  src="{{MEDIA_URL}}{{Listing.img}}" alt="">
+                        </a>
+                    </td>
                     <td><a href="/view/{{Listing.id}}">{{Listing.title}}</a></td>
                     <td><a href="/user/{{Listing.posted_by.id}}">{{Listing.posted_by.first}}#{{Listing.posted_by.id}}</a></td>
                     <td>${{Listing.price}}</td>
