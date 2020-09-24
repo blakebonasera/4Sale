@@ -14,7 +14,9 @@
     <style>
         #map {
             height: 400px;
-            width: 40%;
+            width: 40% auto;
+            margin: 20px;
+            padding: 20px;
         }
 
         img {
@@ -34,26 +36,55 @@
         </div>
     </div>
     <div class="container container-fluid">
-        <img src="{{MEDIA_URL}}{{item.img}}" alt="">
+        <div class="card" style="width: 30rem;">
+            <img class="card-img-top" src="{{MEDIA_URL}}{{item.img}}" alt="Card image cap">
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">Description: {{item.desc}}</li>
+                    <li class="list-group-item">Condition: {{item.condition}}</li>
+                    <li class="list-group-item">Price: ${{item.price}}</li>
+                    <li class="list-group-item">Posted by: <a href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a></li>
+                    <li class="list-group-item">Posted on: {{item.created_at}}</li>
+                    <li class="list-group-item">Location: {{item.location}}</li>
+                  </ul>
+            </div>
+          </div>
+        <!-- <img src="{{MEDIA_URL}}{{item.img}}" alt="">
+        <ul class="list-group">
+            <li class="list-group-item">Description: {{item.desc}}</li>
+            <li class="list-group-item">Condition: {{item.condition}}</li>
+            <li class="list-group-item">Price: ${{item.price}}</li>
+            <li class="list-group-item">Posted by: <a href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a></li>
+            <li class="list-group-item">Posted on: {{item.created_at}}</li>
+          </ul> -->
         <p class="lead"><a href="/view/{{item.id}}/watch">Watch item</a></p>
-        <p class="lead">Description: {{item.desc}}</p>
+        <!-- <p class="lead">Description: {{item.desc}}</p>
         <p class="lead">Condition: {{item.condition}}</p>
         <p class="lead">Price: ${{item.price}}</p>
         <p class="lead">Posted by: <a href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a></p>
-        <p class="lead">Posted on: {{item.created_at}}</p>
-        <p class="lead">Location: {{item.location}}</p>
-        <div id="map"></div>
-        {% for comment in item.comments.all %}
-        {{comment.user.first}} {{comment.user.id}} 
-        {{comment.comment}} {{comment.created_at}}</br>
-        {% endfor %}
-        <form action="/comment/{{item.id}}" method="POST">
-            {% csrf_token %}
-            <label for="comment">Leave a comment</label>
-            <input type="hidden" name="comment_id" value={{item.id}}>
-            <input type="text" name="comment" id="num">
-            <input type="submit" value="Post">
-        </form>
+        <p class="lead">Posted on: {{item.created_at}}</p> -->
+        <!-- <p class="lead">Location: {{item.location}}</p> -->
+        <div class="container">
+            <div class="col-md">
+
+                {% for comment in item.comments.all %}
+                {{comment.user.first}} {{comment.user.id}} 
+                {{comment.comment}} {{comment.created_at}}</br>
+                {% endfor %}
+            </div>
+            <div class="col-md">
+
+                <form action="/comment/{{item.id}}" method="POST">
+                    {% csrf_token %}
+                    <label for="comment">Leave a comment</label>
+                    <input type="hidden" name="comment_id" value={{item.id}}>
+                    <input type="text" name="comment" id="num">
+                    <input type="submit" value="Post">
+                </form>
+            </div>
+            <div id="map"></div>
+            
+        </div>
         <div class="container">
             {% if logged_in_user.id == item.posted_by.id %}
             <h2>Update Listing</h2>

@@ -11,6 +11,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>4Sale: Dashboard</title>
+    
 </head>
 
 <body>
@@ -18,7 +19,7 @@
         <div class="container">
         <a href="/logout" class="btn btn-primary btn-sm">logout</a>
         <h1 class="display-4">
-            Welcome, {{logged_in_user.first}}!
+            Welcome, <a href="/user/{{logged_in_user.id}}">{{logged_in_user.first}}!</a>
         </h1>
         <p class="lead">At 4Sale, We take pride in being a market place for all of your hype neccesaties!</p>
         <hr class="my-4">
@@ -52,9 +53,11 @@
         </table>
         
         <h2>Items you are watching.</h2>
-        <ul>{% for watching in logged_in_user.watching.all %}
-            <li><a href="/view/{{watching.id}}">{{watching.title}}</a></li>
-        </ul>
+        {% for watching in logged_in_user.watching.all %}
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/view/{{watching.id}}">{{watching.title}}</a></li>
+                </ul>
+            
         {% endfor %}
         
     </div>
