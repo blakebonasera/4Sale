@@ -41,12 +41,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for Listing in all_listings %}
+                {% for Listing in all_listings reversed %}
                 <tr>
                     <th scope="row">{{Listing.id}}</th>
                     <td><a href="/view/{{Listing.id}}">{{Listing.title}}</a></td>
-                    <td>{{Listing.posted_by.first}}</td>
-                    <td>{{Listing.price}}</td>
+                    <td><a href="/user/{{Listing.posted_by.id}}">{{Listing.posted_by.first}}#{{Listing.posted_by.id}}</a></td>
+                    <td>${{Listing.price}}</td>
                     {% endfor %}
                 </tr>
             </tbody>
