@@ -40,6 +40,7 @@ def login(request):
             request.session['user_id'] = user.id
             return redirect('/dashboard')
     return redirect('/')
+
 def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
