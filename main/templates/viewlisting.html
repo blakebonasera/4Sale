@@ -30,6 +30,9 @@
             #20BF55;
             color: #FBFBFF;
         }
+        a{
+            color: #0B4F6C;
+        }
     </style>
 </head>
 
@@ -39,7 +42,7 @@
             <a href="/dashboard" class="btn btn-primary btn-sm">Home</a>
             <br>
             <h1 class="display-4">{{item.title}}</h1>
-
+            
         </div>
     </div>
     <div class="container container-fluid">
@@ -51,7 +54,7 @@
                     <li class="list-group-item">Condition: {{item.condition}}</li>
                     <li class="list-group-item">Price: ${{item.price}}</li>
                     <li class="list-group-item">Posted by: <a
-                            href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a></li>
+                            href="/user/{{item.posted_by.id}}">{{item.posted_by.first}}#{{item.posted_by.id}}</a>  <a class='btn btn-success' href = "mailto: {{item.posted_by.email}}">Send Email To User</a></li>
                     <li class="list-group-item">Posted on: {{item.created_at}}</li>
                     <li class="list-group-item">Location: {{item.location}}</li>
                     <li class="list-group-item"><a href="/view/{{item.id}}/watch">Watch item</a></li>
