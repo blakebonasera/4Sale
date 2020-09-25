@@ -87,6 +87,7 @@ def viewListing(request, num):
     item = Listing.objects.get(id=num)
     form= ImageForm(request.POST or None, request.FILES or None)
     context ={
+        'watching': logged_in_user.watching.all(),
         'form': form,
         'logged_in_user': logged_in_user,
         'item': item,

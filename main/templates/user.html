@@ -52,6 +52,19 @@
                 </tr>{% endfor %}
             </tbody>
         </table>
+        {% if logged_in_user.id == view_user.watching.id  %}
+        <h2>Items you are watching</h2>
+        {% endif %}
+        {% for watching in view_user.watching.all %}
+        {% if logged_in_user.id == view_user.watching.id  %}
+                <div class="container">
+            <ul class="list-group list-group-flush">
+                <a href="/view/{{watching.id}}" class="list-group-item list-group-item-action list-group-item-active">{{watching.title}}</a>
+                <!-- <li class="list-group-item"><a href="/view/{{watching.id}}">{{watching.title}}</a></li> -->
+                </ul>
+            </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
     <!-- Optional JavaScript -->
